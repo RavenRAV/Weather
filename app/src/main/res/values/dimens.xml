@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="small_margin">8dp</dimen>
+    <dimen name="null_margin">0dp</dimen>
+    <dimen name="med_margin">32dp</dimen>
+    <dimen name="big_margin">64dp</dimen>
+    <dimen name="text_city">19dp</dimen>
+    <dimen name="textSize16">16dp</dimen>
+    <dimen name="textSize20">20dp</dimen>
+    <dimen name="littleImage">24dp</dimen>
+</resources>

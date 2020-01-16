@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Raven5.1</string>
+    <string name="hello">Привет мир!</string>
+    <string name="skip">пропустить</string>
+    <string name="date">29</string>
+    <string name="day">Май 2019</string>
+    <string name="city">Город</string>
+    <string name="page1">страница1</string>
+    <string name="page2">страница2</string>
+    <string name="page3">страница3</string>
+    <string name="page4">страница4</string>
+    <string name="now">сейчас</string>
+    <string name="little_cloud">облачно</string>
+    <string name="temp">21°</string>
+    <string name="today">сегодня</string>
+    <string name="max">max</string>
+    <string name="min">min</string>
+    <string name="go">принять</string>
+    <string name="this_week">Неделя</string>
+    <string name="_30">30</string>
+    <string name="wind">Ветер</string>
+    <string name="sw_4m_s">4</string>
+    <string name="humidity">Влажность</string>
+    <string name="_81">81%</string>
+    <string name="sunrise">Восход</string>
+    <string name="_6_00">6:00</string>
+    <string name="pressure">Давление</string>
+    <string name="_1010mb">1010mb</string>
+    <string name="cloudiness">Облачность</string>
+    <string name="_100">100%</string>
+    <string name="sunset">Закат</string>
+    <string name="_20_31">20:31</string>
+    <string name="mb">мм рт. ст.</string>
+    <string name="m_s">м/с</string>
+    <string name="sw">SW</string>
+</resources>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Raven5.1</string>
+    <string name="hello">Hello world!</string>
+    <string name="skip">skip</string>
+    <string name="date">29</string>
+    <string name="day">May 2019</string>
+    <string name="city">City</string>
+    <string name="page1">page1</string>
+    <string name="page2">page2</string>
+    <string name="page3">page3</string>
+    <string name="page4">page4</string>
+    <string name="now">now</string>
+    <string name="little_cloud">little cloud</string>
+    <string name="temp">21°</string>
+    <string name="today">today</string>
+    <string name="max">max</string>
+    <string name="min">min</string>
+    <string name="go">go</string>
+    <string name="this_week">This Week</string>
+    <string name="_30">30</string>
+    <string name="wind">Wind</string>
+    <string name="sw_4m_s">SW 4m/s</string>
+    <string name="humidity">Humidity</string>
+    <string name="_81">81%</string>
+    <string name="sunrise">Sunrise</string>
+    <string name="_6_00">6:00</string>
+    <string name="pressure">Pressure</string>
+    <string name="_1010mb">1010mb</string>
+    <string name="cloudiness">Cloudiness</string>
+    <string name="_100">100%</string>
+    <string name="sunset">Sunset</string>
+    <string name="_20_31">20:31</string>
+    <string name="mb">mb</string>
+</resources>

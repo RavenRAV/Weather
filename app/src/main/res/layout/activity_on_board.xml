@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.onboard.OnBoardActivity">
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+<!--        <include-->
+<!--            android:id="@+id/p1"-->
+<!--            layout="@layout/item_onboard"/>-->
+<!--&lt;!&ndash;        <include&ndash;&gt;-->
+<!--&lt;!&ndash;            android:id="@+id/p1"&ndash;&gt;-->
+<!--&lt;!&ndash;            layout="@layout/item_onboard2"/>&ndash;&gt;-->
+<!--&lt;!&ndash;        <include&ndash;&gt;-->
+<!--&lt;!&ndash;            android:id="@+id/p1"&ndash;&gt;-->
+<!--&lt;!&ndash;            layout="@layout/item_onboard3"/>&ndash;&gt;-->
+    </androidx.viewpager.widget.ViewPager>
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:background="@android:color/transparent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>
