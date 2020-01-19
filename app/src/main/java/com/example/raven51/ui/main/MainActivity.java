@@ -2,7 +2,6 @@ package com.example.raven51.ui.main;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,8 +12,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.raven51.R;
-import com.example.raven51.data.entity.CurrentWeather;
-import com.example.raven51.data.entity.Weather;
+import com.example.raven51.data.entity.current.CurrentWeather;
+import com.example.raven51.data.entity.current.Weather;
 import com.example.raven51.data.internet.RetrofitBuilder;
 import com.example.raven51.ui.base.BaseActivity;
 
@@ -22,6 +21,8 @@ import butterknife.BindView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.example.raven51.BuildConfig.API_KEY;
 
 public class MainActivity extends BaseActivity {
     Weather weather;
@@ -88,7 +89,7 @@ public class MainActivity extends BaseActivity {
 
         RetrofitBuilder
                 .getService()
-                .fetchCurrentWeather(city, "17e0c664dfff11e680f71547292ecb8f", "metric", "UTC")
+                .fetchCurrentWeather(city, API_KEY, "metric", "UTC")
                 .enqueue(new Callback<CurrentWeather>() {
                     @Override
                     public void onResponse(Call<CurrentWeather> call, Response<CurrentWeather> response) {
@@ -112,11 +113,11 @@ public class MainActivity extends BaseActivity {
         humidity.setText(weather.getMain().getHumidity().toString()+"%");
         clouds.setText(weather.getClouds().getAll().toString()+"%");
 //        wDeg.setText(weather.getWind().getDeg().toString());
-        sunRise.setText(Hellper.convUNIX(weather.getSys().getSunrise()));
-        sunSet.setText (Hellper.convUNIX(weather.getSys().getSunset()));
+        sunRise.setText(DateHelper.convUNIX(weather.getSys().getSunrise()));
+        sunSet.setText (DateHelper.convUNIX(weather.getSys().getSunset()));
         wSpeed.setText(weather.getWind().getSpeed().toString());
         description.setText(weather.getWeather().get(0).getDescription());
-        day.setText(Hellper.convUNIXDay(weather.getDt()));
+        day.setText(DateHelper.convUNIXDay(weather.getDt()));
         Glide.with(this).load("http://openweathermap.org/img/wn/"+weather.getWeather()
                 .get(0).getIcon() + "@2x.png")
                 .into(iconWeather);

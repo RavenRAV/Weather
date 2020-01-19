@@ -1,5 +1,5 @@
 
-package com.example.raven51.data.entity;
+package com.example.raven51.data.entity.current;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
