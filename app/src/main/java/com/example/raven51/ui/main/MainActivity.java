@@ -89,7 +89,7 @@ public class MainActivity extends BaseActivity {
 
         RetrofitBuilder
                 .getService()
-                .fetchCurrentWeather(city, API_KEY, "metric", "UTC")
+                .fetchCurrentWeather(city, API_KEY, "metric")
                 .enqueue(new Callback<CurrentWeather>() {
                     @Override
                     public void onResponse(Call<CurrentWeather> call, Response<CurrentWeather> response) {
