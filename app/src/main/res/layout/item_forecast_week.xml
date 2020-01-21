@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/week_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="00:00 mn 00 00 0000"
+        android:layout_gravity="center"
+       />
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/week_image"
+            android:layout_width="24dp"
+            style="@style/LittleImage"
+            android:src="@mipmap/ic_launcher_round"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/week_temp_max"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/_30"
+            style="@style/Text" />
+        <TextView
+            android:id="@+id/week_max"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/max"
+            style="@style/Text" />
+    </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/week_temp_min"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/_30"
+                style="@style/Text" />
+            <TextView
+                android:id="@+id/week_min"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/min"
+                style="@style/Text" />
+        </LinearLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+
+
+
+
+</LinearLayout>

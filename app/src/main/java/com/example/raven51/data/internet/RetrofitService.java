@@ -18,9 +18,9 @@ public interface RetrofitService {
     Call<CurrentWeather> fetchCurrentWeather(@Query("q") String city,
                                              @Query("appid") String appId,
                                              @Query("units") String metric);
-//    @GET(FORECAST)
-//    Call<ForecastEntity>getForecast(@Query("q") String city,
-//                                    @Query("appid") String appId,
-//                                    @Query("units") String metric);
+    @GET(FORECAST)
+    Call<ForecastEntity>getForecast(@Query("q") String city,
+                                    @Query("appid") String appId,
+                                    @Query("units") String metric);
 }
 

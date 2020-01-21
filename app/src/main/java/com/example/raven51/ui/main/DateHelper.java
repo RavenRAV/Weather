@@ -6,7 +6,7 @@ import java.util.Date;
 public class DateHelper {
     public static String convUNIX(int dt){
         Date date = new Date(dt * 1000L);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH: mm");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
         String formatt = simpleDateFormat.format(date);
         return formatt;
     }

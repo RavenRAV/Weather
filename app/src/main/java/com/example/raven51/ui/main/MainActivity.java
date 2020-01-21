@@ -10,12 +10,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 import com.example.raven51.R;
 import com.example.raven51.data.entity.current.CurrentWeather;
 import com.example.raven51.data.entity.current.Weather;
+import com.example.raven51.data.entity.forecast.ForecastEntity;
 import com.example.raven51.data.internet.RetrofitBuilder;
 import com.example.raven51.ui.base.BaseActivity;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import retrofit2.Call;
@@ -25,6 +30,8 @@ import retrofit2.Response;
 import static com.example.raven51.BuildConfig.API_KEY;
 
 public class MainActivity extends BaseActivity {
+    private ArrayList<CurrentWeather> forecastWeatherList = new ArrayList<>();
+    public static String WEATHER = "qwe";
     Weather weather;
     @BindView(R.id.day)
     TextView day;
@@ -56,6 +63,9 @@ public class MainActivity extends BaseActivity {
     TextView sunRise;
     @BindView(R.id.sunsetTV)
     TextView sunSet;
+    @BindView(R.id.rViewWeek)
+    RecyclerView recyclerView;
+    WeatherAdapter weatherAdapter;
 
 
 
@@ -68,8 +78,11 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        fetchCurrentWeather("Bishkek");
         initListeners();
+        initRecycler();
+        fetchCurrentWeather("Bishkek");
+        getData();
+        fetchForecastWeather("Bishkek");
     }
     private void initListeners(){
         button.setOnClickListener(new View.OnClickListener() {
@@ -104,6 +117,24 @@ public class MainActivity extends BaseActivity {
                     }
                 });
     }
+    private void fetchForecastWeather(String city){
+        RetrofitBuilder.getService().getForecast(city, API_KEY, "metric")
+                .enqueue(new Callback<ForecastEntity>() {
+                    @Override
+                    public void onResponse(Call<ForecastEntity> call, Response<ForecastEntity> response) {
+                        if(response.isSuccessful()&& response.body()!= null){
+
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ForecastEntity> call, Throwable t) {
+
+                    }
+                });
+    }
 
     private void fillViews(CurrentWeather weather){
         tempMax.setText(weather.getMain().getTempMax().toString());
@@ -121,6 +152,18 @@ public class MainActivity extends BaseActivity {
         Glide.with(this).load("http://openweathermap.org/img/wn/"+weather.getWeather()
                 .get(0).getIcon() + "@2x.png")
                 .into(iconWeather);
+
+    }
+
+    private void getData(){
+        Intent intent = getIntent();
+        ForecastEntity forecastEntity = (ForecastEntity) intent.getSerializableExtra(WEATHER);
+        weatherAdapter.update(forecastEntity.getForecastWeatherList());
+
+    }
+    private void initRecycler(){
+        weatherAdapter = new WeatherAdapter();
+        recyclerView.setAdapter(weatherAdapter);
 
     }
 
