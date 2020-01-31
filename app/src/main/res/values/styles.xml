@@ -33,8 +33,8 @@
         <item name="android:textColor">@color/colorLightGray</item>
     </style>
     <style name="LittleImage">
-        <item name="android:layout_height">24dp</item>
-        <item name="android:layout_marginLeft">@dimen/med_margin</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_marginLeft">@dimen/small_margin</item>
     </style>
 
 </resources>

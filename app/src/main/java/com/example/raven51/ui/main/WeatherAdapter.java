@@ -13,6 +13,7 @@ import com.example.raven51.data.entity.current.CurrentWeather;
 import java.util.ArrayList;
 
 public class WeatherAdapter extends RecyclerView.Adapter<WeatherViewHolder> {
+
     private ArrayList<CurrentWeather> forecastWeatherList = new ArrayList<>();
     @NonNull
     @Override
@@ -20,8 +21,7 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherViewHolder> {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_forecast_week, parent, false);
         return new WeatherViewHolder(view);
     }
-    public void update(ArrayList<CurrentWeather> forecastWeatherList){
-
+    public void update(@NonNull ArrayList<CurrentWeather> forecastWeatherList){
         this.forecastWeatherList = forecastWeatherList;
         notifyDataSetChanged();
     }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Raven5.1</string>
+    <string name="app_name">Weather</string>
     <string name="hello">Hello World!</string>
     <string name="date">29</string>
     <string name="day">May 2019</string>
@@ -12,6 +12,7 @@
     <string name="now">Now</string>
     <string name="little_cloud">Little cloud</string>
     <string name="temp">21°</string>
+    <string name="singtemp">°</string>
     <string name="today">Today</string>
     <string name="max">Max</string>
     <string name="min">Min</string>
@@ -33,5 +34,11 @@
     <string name="mb">mb</string>
     <string name="m_s">m/s</string>
     <string name="sw">SW</string>
+    <string name="start">Start</string>
+    <string name="second_activity">Map</string>
+    <string name="service_stopped">Service Stopped</string>
+    <string name="coord">Your Coordinates</string>
+    <string name="lat">lat :</string>
+    <string name="lon">lon :</string>
 
 </resources>

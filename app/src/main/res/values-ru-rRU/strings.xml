@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Raven5.1</string>
+    <string name="app_name">Погода</string>
     <string name="hello">Привет мир!</string>
     <string name="skip">пропустить</string>
     <string name="date">29</string>
@@ -13,9 +13,10 @@
     <string name="now">сейчас</string>
     <string name="little_cloud">облачно</string>
     <string name="temp">21°</string>
+    <string name="singtemp">°</string>
     <string name="today">сегодня</string>
-    <string name="max">max</string>
-    <string name="min">min</string>
+    <string name="max">макс</string>
+    <string name="min">мин</string>
     <string name="go">принять</string>
     <string name="this_week">Неделя</string>
     <string name="_30">30</string>
@@ -34,4 +35,10 @@
     <string name="mb">мм рт. ст.</string>
     <string name="m_s">м/с</string>
     <string name="sw">SW</string>
+    <string name="start">Старт</string>
+    <string name="second_activity">Карта</string>
+    <string name="service_stopped">Сервис остановлен</string>
+    <string name="coord">Ваше Местоположение: </string>
+    <string name="lat">широта:</string>
+    <string name="lon">долгота:</string>
 </resources>

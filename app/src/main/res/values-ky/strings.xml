@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Raven5.1</string>
+    <string name="app_name">Weather</string>
     <string name="hello">Hello world!</string>
     <string name="skip">skip</string>
     <string name="date">29</string>
@@ -13,6 +13,7 @@
     <string name="now">now</string>
     <string name="little_cloud">little cloud</string>
     <string name="temp">21°</string>
+    <string name="singtemp">°</string>
     <string name="today">today</string>
     <string name="max">max</string>
     <string name="min">min</string>
@@ -32,4 +33,12 @@
     <string name="sunset">Sunset</string>
     <string name="_20_31">20:31</string>
     <string name="mb">mb</string>
+    <string name="m_s">m/s</string>
+    <string name="sw">SW</string>
+    <string name="start">Start</string>
+    <string name="second_activity">Second Activity</string>
+    <string name="service_stopped">Service Stopped</string>
+    <string name="coord">Your Coordinates</string>
+    <string name="lat">lat :</string>
+    <string name="lon">lon :</string>
 </resources>

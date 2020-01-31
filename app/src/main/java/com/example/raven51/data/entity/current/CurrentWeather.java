@@ -4,9 +4,10 @@ package com.example.raven51.data.entity.current;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class CurrentWeather {
+public class CurrentWeather implements Serializable {
 
     @SerializedName("coord")
     @Expose
@@ -44,6 +45,7 @@ public class CurrentWeather {
     @SerializedName("cod")
     @Expose
     private Integer cod;
+
 
     public Coord getCoord() {
         return coord;

@@ -56,7 +56,7 @@ public class OnBoardActivity extends BaseActivity {
         items.add(new onBoardItem(getResources().getString(R.string.page1), R.drawable.rain) );
         items.add(new onBoardItem(getResources().getString(R.string.page2), R.drawable.snow) );
         items.add(new onBoardItem(getResources().getString(R.string.page3), R.drawable.cloud) );
-        items.add(new onBoardItem(getResources().getString(R.string.page4), R.drawable.im4) );
+        items.add(new onBoardItem(getResources().getString(R.string.page4), R.drawable.im4_2) );
 
         return items;
 
