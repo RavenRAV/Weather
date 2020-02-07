@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.PermissionChecker;
 
 import android.Manifest;
 import android.app.Notification;
@@ -25,6 +26,9 @@ import com.example.raven51.data.NotificationHelper;
 import com.example.raven51.ui.base.BaseActivity;
 import com.example.raven51.ui.base.BaseMapActivity;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -40,8 +44,9 @@ import static com.example.raven51.data.NotificationHelper.NOTIFICATION_CHANNEL;
 
 public class ServiceActivity extends BaseMapActivity {
     private FusedLocationProviderClient fusedLocationProviderClient;
-//    LocationManager locationManager;
-//    LocationListener locationListener;
+    LocationRequest locationRequest;
+    LocationManager locationManager;
+    LocationListener locationListener;
     String[] permissios = new String[2];
     private final int REQ_COD = 1001;
 
@@ -68,8 +73,9 @@ public class ServiceActivity extends BaseMapActivity {
 
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+//        locationManager = getSystemService(LOCATION_SERVICE);
 
-//        locationManager.requestLocationUpdates(" ", 5, 1, locationListener );
+
 
         permissios[0]=(Manifest.permission.ACCESS_FINE_LOCATION);
         permissios[1]=(Manifest.permission.ACCESS_COARSE_LOCATION);
@@ -77,7 +83,10 @@ public class ServiceActivity extends BaseMapActivity {
                 == PackageManager.PERMISSION_GRANTED
                 && ContextCompat.checkSelfPermission(this, permissios[1])
                 == PackageManager.PERMISSION_GRANTED ){
-            NotificationHelper.getL(this);
+//            locUpdates();
+            NotificationHelper.locUpdates(this);
+
+//            NotificationHelper.getL(this);
 //            getLastLocation();
         }else{
 
@@ -90,24 +99,44 @@ public class ServiceActivity extends BaseMapActivity {
 
     }
 
+//    public void locUpdates(){
+//        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+//                == PermissionChecker.PERMISSION_GRANTED &&
+//                ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+//                        == PermissionChecker.PERMISSION_GRANTED){
+//            fusedLocationProviderClient = new FusedLocationProviderClient(this);
+//            locationRequest = new LocationRequest();
+//        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY).setInterval(5000).setFastestInterval(1000);
+//        fusedLocationProviderClient.requestLocationUpdates(locationRequest, new LocationCallback(){
+//            @Override
+//            public void onLocationResult(LocationResult locationResult) {
+//                super.onLocationResult(locationResult);
+//                Double lat = locationResult.getLastLocation().getLatitude();
+//                Double lon = locationResult.getLastLocation().getLongitude();
+//
+//
+//            }
+//        }, getMainLooper());}
+//    }
 
 
 
 
 
-    public void getLastLocation() {
-        fusedLocationProviderClient.getLastLocation()
-                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
-                    @Override
-                    public void onSuccess(Location location) {
-                        if( location != null){
-//                            NotificationHelper.getNotification().
 
-
-                        }
-                    }
-                });
-    }
+//    public void getLastLocation() {
+//        fusedLocationProviderClient.getLastLocation()
+//                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+//                    @Override
+//                    public void onSuccess(Location location) {
+//                        if( location != null){
+////                            NotificationHelper.getNotification().
+//
+//
+//                        }
+//                    }
+//                });
+//    }
 
 
 
@@ -118,7 +147,8 @@ public class ServiceActivity extends BaseMapActivity {
             for (int results:grantResults) {
                 if(results == PackageManager.PERMISSION_GRANTED){
 //                    getLastLocation();
-                    NotificationHelper.getL(this);
+//                    NotificationHelper.getL(this);
+                    NotificationHelper.locUpdates(this);
                 }
 
             }

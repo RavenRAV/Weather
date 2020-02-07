@@ -1,7 +1,9 @@
 package com.example.raven51.ui.main;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,18 +13,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.raven51.R;
+import com.example.raven51.data.NotificationHelper;
 import com.example.raven51.data.entity.current.CurrentWeather;
 import com.example.raven51.data.entity.current.Weather;
 import com.example.raven51.data.entity.forecast.ForecastEntity;
 import com.example.raven51.data.internet.RetrofitBuilder;
 import com.example.raven51.ui.Services.ServiceActivity;
 import com.example.raven51.ui.base.BaseActivity;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 
 import java.util.ArrayList;
 
@@ -36,6 +42,7 @@ import static com.example.raven51.BuildConfig.API_KEY;
 public class MainActivity extends BaseActivity {
     //    ArrayList<CurrentWeather>forWL;
     public static String WEATHER = "qwe";
+    private FusedLocationProviderClient fusedLocationProviderClient;
     ForecastEntity forecastEntity;
     //    Weather weather;
     @BindView(R.id.day)
@@ -92,7 +99,6 @@ public class MainActivity extends BaseActivity {
         initRecycler();
         fetchCurrentWeather("Bishkek");
         fetchForecastWeather("Bishkek");
-        recyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.HORIZONTAL));
 //        getData();
     }
 
@@ -145,6 +151,7 @@ public class MainActivity extends BaseActivity {
 
                     @Override
                     public void onFailure(Call<ForecastEntity> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(), " что-то пошло не так" + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
                         Log.e("tag", "onFailure: ");
                     }
                 });
@@ -163,8 +170,10 @@ public class MainActivity extends BaseActivity {
         sunSet.setText(DateHelper.convUNIX(weather.getSys().getSunset()));
         wSpeed.setText(weather.getWind().getSpeed().toString());
         description.setText(weather.getWeather().get(0).getDescription());
-        tvLat.setText(weather.getCoord().getLat().toString());
-        tvLon.setText(weather.getCoord().getLon().toString());
+
+        tvLat.setText("fj");
+        tvLon.setText(NotificationHelper.Longit());
+
         day.setText(DateHelper.convUNIXDay(weather.getDt()));
         Glide.with(this).load("http://openweathermap.org/img/wn/" + weather.getWeather()
                 .get(0).getIcon() + "@2x.png")
@@ -178,6 +187,19 @@ public class MainActivity extends BaseActivity {
 
     public void SecondActivity(View view) {
         startActivity(new Intent(this, ServiceActivity.class));
+    }
+
+    private void permissions(){
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED  ){
+
+
+        }else {
+
+        }
     }
 
 //    private void getData(){

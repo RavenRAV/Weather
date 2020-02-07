@@ -6,10 +6,10 @@
     <string name="date">29</string>
     <string name="day">Май 2019</string>
     <string name="city">Город</string>
-    <string name="page1">страница1</string>
-    <string name="page2">страница2</string>
-    <string name="page3">страница3</string>
-    <string name="page4">страница4</string>
+    <string name="page1">страница 1</string>
+    <string name="page2">страница 2</string>
+    <string name="page3">страница 3</string>
+    <string name="page4">страница 4</string>
     <string name="now">сейчас</string>
     <string name="little_cloud">облачно</string>
     <string name="temp">21°</string>

@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import com.example.raven51.R;
 import com.example.raven51.data.NotificationHelper;
 
+import static com.example.raven51.data.NotificationHelper.stopLocationUpdate;
 import static com.example.raven51.ui.Services.ServiceActivity.SERVICE_ACTIVE;
 
 public class MyForegroundService extends Service {
@@ -28,6 +29,7 @@ public class MyForegroundService extends Service {
         }
         else {
             stopSelf();
+            stopLocationUpdate();
         }
         return START_STICKY;
     }

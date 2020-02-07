@@ -43,7 +43,7 @@ public class OnBoardActivity extends BaseActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
 
         String[] text = new String[]{"1 page", "2 page", "3 page", "4 page" };
-        int[] pict = new int[]{R.drawable.im1, R.drawable.im2,R.drawable.im3 };
+        int[] pict = new int[]{R.drawable.rain, R.drawable.snow,R.drawable.cloud };
 
         initViewPagerAdapter();
 
