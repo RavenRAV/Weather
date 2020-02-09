@@ -40,17 +40,17 @@ public class NotificationHelper {
     public static ArrayList<String> list = new ArrayList<>();
 
 
-//    static FusedLocationProviderClient fusedLocationProviderClient(Context context) {
+    //    static FusedLocationProviderClient fusedLocationProviderClient(Context context) {
 //        return LocationServices.getFusedLocationProviderClient(context);
 //    }
-    public static void locUpdates(Context context){
+    public static void locUpdates(Context context) {
         locationRequest = new LocationRequest();
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
                 .setFastestInterval(2000)
                 .setInterval(4000);
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context);
 
-        fusedLocationProviderClient.requestLocationUpdates(locationRequest,mLocationCallback= new LocationCallback(){
+        fusedLocationProviderClient.requestLocationUpdates(locationRequest, mLocationCallback = new LocationCallback() {
             @Override
             public void onLocationResult(LocationResult locationResult) {
                 super.onLocationResult(locationResult);
@@ -61,42 +61,33 @@ public class NotificationHelper {
                 list.add(lat);
                 list.add(lon);
                 getNotification(context);
-                Log.e("tag","lat: "+locationResult.getLastLocation().getLatitude()
-                        +"long: "+locationResult.getLastLocation().getLongitude());
+                Log.e("tag", "lat: " + locationResult.getLastLocation().getLatitude()
+                        + "long: " + locationResult.getLastLocation().getLongitude());
 
-                Log.e("-----------" , "lat + lon "  + list.size());
+                Log.e("-----------", "lat + lon " + list.size());
 
             }
         }, Looper.getMainLooper());
     }
-    public static String Longit(){
+
+    public static String longit() {
         return lon;
     }
 
+    public static String latit() {
+        return lat;
+    }
 
 
-    public static void stopLocationUpdate(){
-        
+    public static void stopLocationUpdate() {
+
         fusedLocationProviderClient.removeLocationUpdates(mLocationCallback);
     }
 
+    public static String text(Context context) {
 
-//
-//    public static void getL(Context context){
-//        fusedLocationProviderClient(context).getLastLocation()
-//                .addOnSuccessListener(location -> {
-//                    if (location != null){
-//                        lat = (String.valueOf(location.getLatitude()));
-//                        lon = (String.valueOf(location.getLongitude()));
-//                    }
-//                });
-//    }
-
-    public static String text(Context context){
-
-        return context.getString(R.string.lat) + " " + lat + " " +context.getString(R.string.lon) + " " + lon;
+        return context.getString(R.string.lat) + " " + lat + " " + context.getString(R.string.lon) + " " + lon;
     }
-
 
 
     public static Notification getNotification(Context context) {
@@ -112,20 +103,14 @@ public class NotificationHelper {
                         .bigText(text(context)))
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .build();
-
     }
-//    public void createNotification(Context context){
-//        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
-//        notificationManager.notify(1, getNotification(context));
-//    }
+
 
     public static PendingIntent createPendingIntent(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         return PendingIntent.getActivity(context, 0, intent, 0);
-
     }
-
 
     public static void createNotificationChannel(Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -138,9 +123,5 @@ public class NotificationHelper {
             notificationManager.createNotificationChannel(channel);
         }
     }
-
-
-
-
 
 }

@@ -21,6 +21,12 @@ public interface RetrofitService {
                                              @Query("lat") String lat,
                                              @Query("lon") String lon);
 
+    @GET(CURRENT)
+    Call<CurrentWeather> fetchCurrentWeatherByCoordinates(@Query("appid") String appId,
+                                             @Query("units") String metric,
+                                             @Query("lat") String lat,
+                                             @Query("lon") String lon);
+
     @GET(FORECAST)
     Call<ForecastEntity>getForecast(@Query("q") String city,
                                     @Query("appid") String appId,

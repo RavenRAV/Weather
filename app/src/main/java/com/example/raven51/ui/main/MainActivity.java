@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,23 +15,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.raven51.R;
 import com.example.raven51.data.NotificationHelper;
 import com.example.raven51.data.entity.current.CurrentWeather;
-import com.example.raven51.data.entity.current.Weather;
 import com.example.raven51.data.entity.forecast.ForecastEntity;
 import com.example.raven51.data.internet.RetrofitBuilder;
 import com.example.raven51.ui.Services.ServiceActivity;
 import com.example.raven51.ui.base.BaseActivity;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
-
-import java.util.ArrayList;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 import butterknife.BindView;
 import retrofit2.Call;
@@ -38,9 +35,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.example.raven51.BuildConfig.API_KEY;
+import static com.example.raven51.data.internet.ApiEndpoints.IMAGE_API;
+import static com.example.raven51.data.internet.ApiEndpoints.IMG;
 
 public class MainActivity extends BaseActivity {
     //    ArrayList<CurrentWeather>forWL;
+    private String latitude;
+    private String longitude;
     public static String WEATHER = "qwe";
     private FusedLocationProviderClient fusedLocationProviderClient;
     ForecastEntity forecastEntity;
@@ -97,8 +98,9 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         initListeners();
         initRecycler();
-        fetchCurrentWeather("Bishkek");
-        fetchForecastWeather("Bishkek");
+
+        getLocation();
+        permissions();
 //        getData();
     }
 
@@ -108,6 +110,22 @@ public class MainActivity extends BaseActivity {
             fetchForecastWeather(editText.getText().toString().trim());
         });
 
+    }
+
+    //
+    public void getLocation() {
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getApplicationContext());
+        fusedLocationProviderClient.getLastLocation().addOnSuccessListener(location -> {
+            if (location != null) {
+                latitude = (String.valueOf(location.getLatitude()));
+                longitude = (String.valueOf(location.getLongitude()));
+                tvLat.setText(latitude);
+                tvLon.setText(longitude);
+                fetchCurrentWeatherByCoordinates();
+            }
+
+
+        });
     }
 
     public static void start(Context context) {
@@ -133,15 +151,36 @@ public class MainActivity extends BaseActivity {
                 });
     }
 
+    private void fetchCurrentWeatherByCoordinates() {
+        RetrofitBuilder
+                .getService()
+                .fetchCurrentWeatherByCoordinates(API_KEY, "metric", latitude, longitude)
+                .enqueue(new Callback<CurrentWeather>() {
+                    @Override
+                    public void onResponse(Call<CurrentWeather> call, Response<CurrentWeather> response) {
+                        if (response.isSuccessful() && response.body() != null) {
+                            fillViews(response.body());
+                            editText.setText(response.body().getName());
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<CurrentWeather> call, Throwable t) {
+
+                    }
+                });
+    }
+
     private void fetchForecastWeather(String city) {
         RetrofitBuilder.getService().getForecast(city, API_KEY, "metric", "lat", " lon")
                 .enqueue(new Callback<ForecastEntity>() {
                     @Override
                     public void onResponse(Call<ForecastEntity> call, Response<ForecastEntity> response) {
                         try {
-                            if (response.isSuccessful() && response.body() != null ) {
+                            if (response.isSuccessful() && response.body() != null) {
 
-                               forecastEntity = response.body();
+                                forecastEntity = response.body();
                                 weatherAdapter.update(forecastEntity.getForecastWeatherList());
                             }
                         } catch (Exception e) {
@@ -159,7 +198,7 @@ public class MainActivity extends BaseActivity {
 
 
     private void fillViews(CurrentWeather weather) {
-        tempMax.setText(weather.getMain().getTempMax().toString()+ getString(R.string.singtemp));
+        tempMax.setText(weather.getMain().getTempMax().toString() + getString(R.string.singtemp));
         tempMin.setText(weather.getMain().getTempMin().toString() + getString(R.string.singtemp));
         tempNow.setText(weather.getMain().getTemp().toString() + getString(R.string.singtemp));
         pressure.setText(weather.getMain().getPressure().toString());
@@ -171,12 +210,12 @@ public class MainActivity extends BaseActivity {
         wSpeed.setText(weather.getWind().getSpeed().toString());
         description.setText(weather.getWeather().get(0).getDescription());
 
-        tvLat.setText("fj");
-        tvLon.setText(NotificationHelper.Longit());
+//        tvLat.setText(latitude);
+//        tvLon.setText(longitude);
 
         day.setText(DateHelper.convUNIXDay(weather.getDt()));
-        Glide.with(this).load("http://openweathermap.org/img/wn/" + weather.getWeather()
-                .get(0).getIcon() + "@2x.png")
+        Glide.with(this).load(IMAGE_API + weather.getWeather()
+                .get(0).getIcon() + IMG)
                 .into(iconWeather);
     }
 
@@ -189,18 +228,20 @@ public class MainActivity extends BaseActivity {
         startActivity(new Intent(this, ServiceActivity.class));
     }
 
-    private void permissions(){
+    private void permissions() {
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED &&
                 ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED  ){
+                        == PackageManager.PERMISSION_GRANTED) {
+            tvLat.setText(latitude);
+            tvLon.setText(longitude);
 
-
-        }else {
+        } else {
 
         }
     }
+
 
 //    private void getData(){
 //        Intent intent = getIntent();
